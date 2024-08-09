@@ -22,6 +22,7 @@ view: productos {
     sql: ${TABLE}.document_id ;;
   }
   dimension: factura_id {
+    primary_key: yes
     type: number
     # hidden: yes
     sql: ${TABLE}.factura_id ;;
