@@ -67,4 +67,28 @@ view: facturas {
     type: count
     drill_fields: [factura_id, supplier_name, cargue.count, productos.count]
   }
+###########################################
+  dimension: percent_confidence {
+    type: number
+    sql:
+    ((coalesce(${facturas.invoice_date_confidence}, 0) +
+      coalesce(${facturas.net_amount_confidence}, 0) +
+      coalesce(${facturas.total_amount_confidence}, 0) +
+      coalesce(${facturas.total_tax_amount_confidence}, 0) +
+      coalesce(${facturas.supplier_name_confidence}, 0)) / 5);;
+    value_format_name: "percent_2"
+    label: "% confiabilidad"
+  }
+
+  measure: avg_confidence_percent {
+    type: average
+    sql: ${percent_confidence} ;;
+    label: "% confiabilidad medio"
+    value_format_name: "percent_2"
+  }
+  measure: distinct_factura_count {
+    type: count_distinct
+    sql: ${factura_id} ;;
+    label: "Productos"
+  }
 }

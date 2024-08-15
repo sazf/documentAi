@@ -47,6 +47,13 @@ view: productos {
     type: number
     sql: ${TABLE}.unit_price_confidence ;;
   }
+  dimension: ok {
+    type: string
+    sql: case
+    when ${unit_price}*${quantity}=${amount} then "si"
+    else "no"
+    end;;
+  }
   measure: count {
     type: count
     drill_fields: [facturas.factura_id, facturas.supplier_name]
