@@ -54,6 +54,10 @@ view: productos {
     else "no"
     end;;
   }
+  measure: avg_price {
+    type: average
+    sql: ${unit_price} ;;
+  }
   measure: count {
     type: count
     drill_fields: [facturas.factura_id, facturas.supplier_name]

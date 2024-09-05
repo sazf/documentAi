@@ -37,4 +37,9 @@ explore: productos {
     sql_on: ${productos.factura_id} = ${facturas.factura_id} ;;
     relationship: many_to_one
   }
+  join: referencia {
+    type: left_outer
+    sql_on: ${productos.description} = ${referencia.description} ;;
+    relationship: many_to_one
+  }
 }
